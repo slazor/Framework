@@ -1,0 +1,39 @@
++ : ADDED
+*  : CHANGED 
+-  : REMOVED
+
+
+--
+
+
+BETA 2 (2012-02-25)
+	+ Added function (arg)
+	+ Added security layer in htaccess file. (Only allows certain files to be accessed)
+
+	* Vastly improved page handling in htaccess file (Thanks to GOOSK)
+	* Some changes in template file handling because of ^
+	* Renamed custom template functions from ex. "page_all" to "page_preprocess_all"
+	* New output array in template files. ($page_all['name'] and $page_mypage['dates]) to a combined: ($vars['name'] and $vars['dates'])
+	* Renamed templates files to .tpl.php instead of .php only
+
+
+---
+
+
+BETA 2 (2012-02-02)
+	+ Added functions (validateEmail, redirect)
+	
+	* Updated jQuery 1.6.0 -> 1.7.1
+	* Handling of template functions. Now uses references instead of return value
+	* Added $randomString1, $randomString2 to variable unset
+
+	
+---
+	
+	
+BETA 1 (2011-10-16)
+	+ Added basic cache
+	
+	* Lots of changes everywhere
+	
+	- Removed uneccecary code
