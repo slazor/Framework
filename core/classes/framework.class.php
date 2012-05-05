@@ -1,4 +1,4 @@
-<?php // 2011-10-16
+<?php // 2012-05-05
 class Framework {
 
 	private $mysqli, $hash1, $hash2;
@@ -115,6 +115,25 @@ class Framework {
 
 	public function encrypt($string) {
 		return sha1(md5($this->hash1.base64_encode($this->hash2.$string)).$this->hash1);
+	}
+	
+	public function load_classes($directory) {
+		$files = array();
+		$results = array();
+		$handler = opendir($directory);
+		while($file = readdir($handler)) {
+			if($file != "." && $file != ".." && strpos($file,'.class.php')) {
+				$files[] = $file;
+			}
+		}
+		closedir($handler);
+		
+		foreach($files AS $file) {
+			$results['file'][] = $file;
+			$results['name'][] = str_replace('.class.php','',$file);
+		}
+		
+		return $results;
 	}
 
 	// PRIVATE FUNCTIONS

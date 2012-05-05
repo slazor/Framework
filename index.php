@@ -1,4 +1,4 @@
-<?php // 2012-02-26
+<?php // 2012-05-05
 	session_start();
 	define("INDEX", true);
 	ob_start();
@@ -23,7 +23,7 @@
 		// PageFunction to run
 		if(!isset($pageFunction)) $pageFunction = 'page_preprocess_'.str_replace('.','_',$args);
 
-		// Classes to include and create instances of ( AUTOMATIC CLASS INIT WILL BE AVAILABLE LATER )
+		// Framework class include
 		require_once('core/classes/framework.class.php');
 
 		// Init SQL
@@ -39,54 +39,66 @@
 		// Load template functions
 		require_once('application/functions.php');
 
-		// Load page_all function if it exists
-		$data = array();
+		// Data storage
 		$vars = array();
-		if(function_exists('page_preprocess_all')) page_preprocess_all($data, $fw);
 		
-		// Create variables from page_all template function
-		if(isset($data) && is_array($data)) {
-			foreach($data AS $key => &$dta) {
-				if(!isset($page_all[$key]) && ($key != 'style' || $key != 'script')) $vars[$key] = $data[$key];
+		// Get all classes to load
+		$classes = $fw->load_classes('application/classes/');
+		
+		foreach($classes['file'] AS $k => $class) {
+			if(!empty($class)) {
+				// Include classes
+				require_once('application/classes/'.$class);
+				if(!class_exists($classes['name'][$k])) { 
+					throw new ErrorException('Class Not Found !');
+				} else { 
+					// Create instances
+					${$classes['name'][$k]} = new $classes['name'][$k]();
+					if(method_exists(${$classes['name'][$k]},'returner')) {
+						// Run all returners
+						${$classes['name'][$k]}->returner($vars);
+					}
+				}
 			}
 		}
+		
+		// Load page_preprocess_all function if it exists
+		if(function_exists('page_preprocess_all')) page_preprocess_all($vars, $fw);
 
 		// Pick up styles and script if set in template function
-		if(isset($data['style'])) $style	= array_merge($style,$data['style']);
-		if(isset($data['script'])) $script	= array_merge($script,$data['script']);
+		if(isset($vars['style'])) $style	= array_merge($style,$vars['style']);
+		if(isset($vars['script'])) $script	= array_merge($script,$vars['script']);
 
 		// Load page function if it exists
-		if(function_exists($pageFunction)) $pageFunction($data, $fw);
+		if(function_exists($pageFunction)) $pageFunction($vars, $fw);
 
-		// Create variables from current page template function
-		if(isset($data) && is_array($data)) {
-			foreach($data AS $key => &$dta) {
-				if(!isset(${"$pageFunction"}[$key]) && ($key != 'style' || $key != 'script')) $vars[$key] = $dta;
-				if($key == 'cache' && $dta === FALSE) { $cache = FALSE; ob_end_flush(); }
+		// Run all modifiers
+		for($k=0;$k<sizeof($classes['name']);$k++) {
+			if(method_exists(${$classes['name'][$k]},'modifier')) {
+				${$classes['name'][$k]}->modifier($vars);
 			}
 		}
-
+		
 		// Pick up styles and script if set in template function
-		if(isset($data['style']))		$framework['style']		= array_merge($framework['style'],$data['style']);
-		if(isset($data['script']))	$framework['script']	= array_merge($framework['script'],$data['script']);
+		if(isset($vars['style']))	$framework['style']	= array_merge($framework['style'],$vars['style']);
+		if(isset($vars['script']))	$framework['script']	= array_merge($framework['script'],$vars['script']);
 
 		// Framework variables
 		$pageName	= $framework['pageName'];
-		$title				= $page;
+		$title			= $page;
 		
-		if(isset($vars['title']))	$title	= $vars['title'];
 		if(isset($vars['title'])) $title = $vars['title'];
 
-		$styles		= $fw->getStyles($framework['style']);		// Returns styles
-		$scripts		= $fw->getScripts($framework['script']);	// Returns scripts
+		$styles	= $fw->getStyles($framework['style']);		// Returns styles
+		$scripts	= $fw->getScripts($framework['script']);	// Returns scripts
 
 		// Everything except template is now loaded. Unset unnecessary and sensitive variables
-		unset($framework,$key,$data,$pageFunction,$GLOBALS,$dta,$randomString1,$randomString2);
+		unset($framework,$key,$vars['script'],$vars['style'],$pageFunction,$GLOBALS,$dta,$randomString1,$randomString2);
 
 		// Start loading templates
 		require_once('application/main.tpl.php');
 		$mysqli->close();
-
+		
 		if($cache === TRUE) {
 			echo "<!-- Cache updated ".date('jS F Y H:i')." -->";
 			$fp = fopen('cache/'.$cachefile, 'w');
@@ -95,4 +107,5 @@
 			ob_end_flush();
 		}
 	}
+
 ?>

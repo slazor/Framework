@@ -6,7 +6,7 @@
 
 	/* INCLUDED FILES */
 	$framework['style']		= array('reset','style'); 		// Styles to be included
-	$framework['script']	= array('jquery','script');		// Scripts to be included
+	$framework['script']		= array('jquery','script');		// Scripts to be included
 
 	/* MYSQL SERVER SETTINGS */
 	$framework['dbHost']	= '';										// MySQL Host
@@ -21,5 +21,5 @@
 	/* SECURITY SETTINGS */
 	$randomString1			= 'k)aZ$6BeqVKWX@a';	// Encryption string 1
 	$randomString2			= 'W8O!7G5#2uLk=fq';		// Encryption string 2
-	$stripTags					= array('script', 'style');		// Tags to remove before database inserts
+	$stripTags				= array('script', 'style');		// Tags to remove before database inserts
 ?>

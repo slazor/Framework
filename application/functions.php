@@ -1,14 +1,13 @@
-<?php // 2012-02-26
-	if(!defined('INDEX')) die("No direct script access allowed.");
+<?php // 2012-05-05
 	
 	// Function that runs on every page.
-	function page_preprocess_all(&$data, $fw = NULL) {
+	function page_preprocess_all(&$vars, $fw = NULL) {
 		// Loading of variables and such that is used on every pageload
-		$data['allPageArray'] = array('part1', 'part2');
+		$vars['allPageArray'] = array('part1', 'part2');
 	}
 
 	// Function that runs on single page
-	function page_preprocess_start(&$data, $fw = NULL) {
+	function page_preprocess_start(&$vars, $fw = NULL) {
 		/* 
 		Loading of variables and such that is used only on the page "start.page.php"
 		
@@ -28,14 +27,14 @@
 		SELECT: $return = $fw->query('SELECT * FROM table WHERE column = ?', array(value));
 		*/
 		
-		$data['title']	= 'The Startpage Page';
+		$vars['title']	= 'The Startpage Page';
 	}
 
-	function page_preprocess_page(&$data, $fw = NULL) {
+	function page_preprocess_page(&$vars, $fw = NULL) {
 		//$data['cache']		= FALSE;
-		$data['title']			= 'The Page Page';
-		$data['style']		= array('theCSS', 'theSecondCSS');
-		$data['script']		= array('theJS','theSecondJS');
-		$data['customVar']	= 'Hello world';
+		$vars['title']			= 'The Page Page';
+		$vars['style']			= array('theCSS', 'theSecondCSS');
+		$vars['script']			= array('theJS','theSecondJS');
+		$vars['customVar']	= 'Hello world';
 	}
 ?>

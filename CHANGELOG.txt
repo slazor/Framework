@@ -1,20 +1,35 @@
-+ : ADDED
-*  : CHANGED 
++  : ADDED
+*  : CHANGED
 -  : REMOVED
-
+!  : INFO
 
 --
 
 
-BETA 2 (2012-02-25)
+BETA 3 (2012-05-05)
+	+ Added automatic class loading
+	+ Added example class file
+	+ Added function (timeago)
+
+	* Optimized $vars array handling
+	* Slightly changed the preprocesses handling of the $vars array
+	* Updated jQuery 1.7.1 -> 1.7.2
+
+	! Average load time without cache including 1 class (local): 0.01 Sec
+
+
+---
+
+
+BETA 2v2 (2012-02-25)
 	+ Added function (arg)
 	+ Added security layer in htaccess file. (Only allows certain files to be accessed)
 
 	* Vastly improved page handling in htaccess file (Thanks to GOOSK)
 	* Some changes in template file handling because of ^
 	* Renamed custom template functions from ex. "page_all" to "page_preprocess_all"
-	* New output array in template files. ($page_all['name'] and $page_mypage['dates]) to a combined: ($vars['name'] and $vars['dates'])
-	* Renamed templates files to .tpl.php instead of .php only
+	* New output array in template files. ($page_all['name'] and $page_mypage['dates']) to a combined: ($vars['name'] and $vars['dates'])
+	* Renamed template files to .tpl.php instead of .php only
 
 
 ---

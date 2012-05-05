@@ -1,0 +1,6 @@
+ErrorDocument 404 "<h1>404</h1>"
+
+RewriteEngine on
+
+RewriteRule ^[^:]*\.(src|jpg|jpeg|png|gif|css|js|inc|swf|flv|pl|ico|zip|rar|svg)$ - [L,NC]
+RewriteRule ^/?(.*)$ index.php?args=$1 [L,QSA]
