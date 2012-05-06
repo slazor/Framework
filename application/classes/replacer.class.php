@@ -1,10 +1,14 @@
 <?php // 2012-05-05
 class Replacer {
 	private $new_title;
-	
+	private $db;
 	/*	Set up data here if you want
 	*/
-	function __construct() { 
+	function __construct($fw) { 
+		// Catch $fw object to access database
+		//$this->db = $fw;
+		//$return = $this->db->query('SELECT * FROM table');
+		
 		$this->replacer_title_change('New Title');
 	}
 	

@@ -5,6 +5,18 @@
 
 --
 
+RC1 !INPROGRESS! (2012-05-06)
+	+ Added ability to use external javascripts
+	+ Added ability to use inline javascript
+	+ Added ability to catch url as arguments instead of comming to a 404 if template file does not exist
+
+	* Small changes to javascript include handle because of external/inline javascript
+	* Template file of current page is now available as $content in main.tpl.php. Just print it.
+	* Classes now have access to the $fw object for database actions
+
+
+---
+
 
 BETA 3 (2012-05-05)
 	+ Added automatic class loading

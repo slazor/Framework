@@ -24,7 +24,22 @@ class Framework {
 	public function getScripts($data = NULL) {
 		if(is_array($data) && count($data) > 0) {
 			$scripts = '';
-			foreach($data AS $script) { $scripts .= '<script src="'.base_path().'application/assets/script/'.$script.'.js" type="text/javascript"></script>'."\r\n"; }
+			foreach($data AS $k => $script) { 
+				if($k !== 'inline') {
+					if(strpos($script,'http://') !== FALSE) {
+						$scripts .= '<script src="'.$script.'" type="text/javascript"></script>'."\r\n"; 
+					} else {
+						$scripts .= '<script src="'.base_path().'application/assets/script/'.$script.'.js" type="text/javascript"></script>'."\r\n"; 
+					}
+				}
+			}
+
+			if(isset($data['inline'])) {
+				foreach($data['inline'] AS $inline) {
+					$scripts .= '<script type="text/javascript">'."\r\n".$inline."\r\n".'</script>'."\r\n"; 
+				}
+			}
+			
 			return $scripts;
 		}
 	}
