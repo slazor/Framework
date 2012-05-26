@@ -16,7 +16,7 @@ BETA 4 !INPROGRESS! (2012-05-26)
 	+ Added ability to use external javascripts
 	+ Added ability to use inline javascript
 	+ Added ability to catch url as arguments instead of comming to a 404 if template file does not exist
-	+ Module now has it's own folders to work with for file includes and other things.
+	+ Modules now has it's own folders to work with for file includes and other things.
 	+ Added module (tiny_mce)
 	+ Added basic html/css design
 
