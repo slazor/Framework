@@ -1,4 +1,4 @@
-<?php // 2012-05-05
+<?php // 2012-05-25
 	
 	// Function that runs on every page.
 	function page_preprocess_all(&$vars, $fw = NULL) {
@@ -44,24 +44,27 @@
 		
 		$inline_js_one = '
 			$(document).ready(function() {
-				$("body").css("background-color","#eee");
+				//$("body").css("background-color","#eee");
 			});
 		';
 		
 		$inline_js_two = '
 			$(document).ready(function() {
-				$("li a").css("background-color","#eee");
+				//$("li a").css("background-color","#eee");
 			});
 		';
 		
 		$vars['title']				= 'The Page Page';
-		$vars['style']			= array('theCSS', 'theSecondCSS');
-		$vars['script']			= array('theJS', 'theSecondJS', 'inline' => array($inline_js_one,$inline_js_two));
-		$vars['customVar']	= 'Hello world';
+		//$vars['style']			= array('theCSS', 'theSecondCSS');
+		//$vars['script']			= array('theJS.js', 'theSecondJS.js', 'inline' => array($inline_js_one,$inline_js_two));
+		$vars['access_code']	= generate_access_code();
 	}
 	
 	function page_preprocess_page_sub(&$vars, $fw = NULL) {
 		$vars['baloo'] = $vars['catch_args'];
+		$links = generate_download_url("file.txt","Download file");
+		$vars['title'] = 'TinyMCE module test';
+		//print generate_access_code();
 	}
 	
 	function page_preprocess_blog(&$vars, $fw = NULL) {

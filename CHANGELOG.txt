@@ -1,3 +1,9 @@
+TODO:
+	Add method of selecting module load order
+	Build a small website to try everything out.
+
+
+
 +  : ADDED
 *  : CHANGED
 -  : REMOVED
@@ -5,14 +11,26 @@
 
 --
 
-RC1 !INPROGRESS! (2012-05-06)
+BETA 4 !INPROGRESS! (2012-05-26)
+	+ Added functions (generate_download_url, get_path)
 	+ Added ability to use external javascripts
 	+ Added ability to use inline javascript
 	+ Added ability to catch url as arguments instead of comming to a 404 if template file does not exist
+	+ Module now has it's own folders to work with for file includes and other things.
+	+ Added module (tiny_mce)
+	+ Added basic html/css design
 
 	* Small changes to javascript include handle because of external/inline javascript
 	* Template file of current page is now available as $content in main.tpl.php. Just print it.
 	* Classes now have access to the $fw object for database actions
+	* Classes now resides in subfolders in the "classses" folder
+	* All functions in "core/functions" now uses underscore instead of CamelCase
+	* The "$vars['style']" and "$vars['script']" arrays now gets cleaned after "page_preprocess_all"
+	* Javascript includes now has to be written with the extension in the entire framework
+	* Change module folder name from "application/classes" to "application/modules"
+	* Change module filename from ex. "tiny_mce.class.php" to tiny_mce.php
+	
+	- Removed module (replacer)
 
 
 ---

@@ -1,0 +1,120 @@
+/* General */
+body {
+	background-color: #ccc;
+}
+
+h1, h2, h3, h4, h1 a, h2 a, h3 a, h4 a {
+	font-family: Verdana;
+}
+h1, h1 a { font-size: 45px; }
+h2, h2 a { font-size: 35px; }
+h3, h3 a { font-size: 25px; }
+h4, h4 a { font-size: 20px; }
+
+h1, h2, h3, h4, p, div, span {
+	color: #000;
+}
+
+a, p, div, span, article {
+	font-family: Georgia, Times New Roman;
+	font-size: 15px;
+}
+
+a {
+	color: #0af;
+	text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+
+
+/* Classes */
+.underline {
+	text-decoration: underline;
+}
+
+.thick {
+	font-weight: bold;
+}
+
+
+/* Container */
+#wrapper {
+	background-color: #eee;
+	border: 1px solid #000;
+	margin: 10px auto;
+	width: 960px;
+}
+
+
+/* Header */
+#header-container {
+	width: 960px;
+}
+
+#header-container h1 {
+	margin: 15px 1px;
+}
+
+#header-container h1.title a {
+	font-weight: bold;
+	color: #333;
+}
+
+#header-container h1.title a:hover {
+	text-decoration: none;
+}
+
+/* Menu */
+#menu  {
+	border-top: 1px solid #000;
+	border-bottom: 1px solid #000;
+	height: 19px;	
+}
+
+#menu ul {
+	margin-top: 1px;
+}
+
+#menu li {
+	display: inline;
+	margin-right: -4px;
+}
+
+#menu li a {
+	border-right: 1px solid #ccc;
+	height: 20px;
+	font-family: Arial;
+	font-size: 15px;
+	padding: 0px 10px 2px 5px;
+}
+#menu li a:hover {
+	color: #555;
+	background-color: #ccc;
+	text-decoration: none;
+}
+
+
+/* Content */
+#content-container {
+	margin: 10px 4px 15px;
+}
+
+#content-container h2 {
+	margin-bottom: 15px;
+}
+
+#content-container p {
+	margin-bottom: 10px;
+}
+
+
+/* Footer */
+#footer-container {
+	border-top: 1px solid #000;
+}
+
+#footer-container p {
+	margin: 5px;
+}
+
+

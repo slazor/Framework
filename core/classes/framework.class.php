@@ -1,4 +1,4 @@
-<?php // 2012-05-05
+<?php // 2012-05-26
 class Framework {
 
 	private $mysqli, $hash1, $hash2;
@@ -26,10 +26,10 @@ class Framework {
 			$scripts = '';
 			foreach($data AS $k => $script) { 
 				if($k !== 'inline') {
-					if(strpos($script,'http://') !== FALSE) {
+					if(strpos($script,'http://') !== FALSE || strpos($script,'application/modules/') !== FALSE) {
 						$scripts .= '<script src="'.$script.'" type="text/javascript"></script>'."\r\n"; 
 					} else {
-						$scripts .= '<script src="'.base_path().'application/assets/script/'.$script.'.js" type="text/javascript"></script>'."\r\n"; 
+						$scripts .= '<script src="'.base_path().'application/assets/script/'.$script.'" type="text/javascript"></script>'."\r\n"; 
 					}
 				}
 			}
@@ -137,17 +137,19 @@ class Framework {
 		$results = array();
 		$handler = opendir($directory);
 		while($file = readdir($handler)) {
-			if($file != "." && $file != ".." && strpos($file,'.class.php')) {
-				$files[] = $file;
+			if($file != "." && $file != "..") {
+				if(is_dir($directory.$file)) {
+					$files[] = $directory.$file.'/'.$file.'.php';
+				}
 			}
 		}
 		closedir($handler);
-		
-		foreach($files AS $file) {
-			$results['file'][] = $file;
-			$results['name'][] = str_replace('.class.php','',$file);
+		foreach($files AS $k => $file) {
+			$results['file'][$k] = $file;
+			$results['name'][$k] = str_replace('.php','',$file);
+			$e = explode('/',$results['name'][$k]);
+			$results['name'][$k] = end($e);
 		}
-		
 		return $results;
 	}
 

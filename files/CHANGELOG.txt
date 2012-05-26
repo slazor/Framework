@@ -1,0 +1,74 @@
+TODO:
+	Add function (generateDownloadUrl)
+	Add method of selecting module load order
+	Add method of custom class file includes
+	Build a small website to try everything out.
+
+
+
++  : ADDED
+*  : CHANGED
+-  : REMOVED
+!  : INFO
+
+--
+
+RC1 !INPROGRESS! (2012-05-06)
+	+ Added ability to use external javascripts
+	+ Added ability to use inline javascript
+	+ Added ability to catch url as arguments instead of comming to a 404 if template file does not exist
+
+	* Small changes to javascript include handle because of external/inline javascript
+	* Template file of current page is now available as $content in main.tpl.php. Just print it.
+	* Classes now have access to the $fw object for database actions
+
+
+---
+
+
+BETA 3 (2012-05-05)
+	+ Added automatic class loading
+	+ Added example class file
+	+ Added function (timeago)
+
+	* Optimized $vars array handling
+	* Slightly changed the preprocesses handling of the $vars array
+	* Updated jQuery 1.7.1 -> 1.7.2
+
+	! Average load time without cache including 1 class (local): 0.01 Sec
+
+
+---
+
+
+BETA 2v2 (2012-02-25)
+	+ Added function (arg)
+	+ Added security layer in htaccess file. (Only allows certain files to be accessed)
+
+	* Vastly improved page handling in htaccess file (Thanks to GOOSK)
+	* Some changes in template file handling because of ^
+	* Renamed custom template functions from ex. "page_all" to "page_preprocess_all"
+	* New output array in template files. ($page_all['name'] and $page_mypage['dates']) to a combined: ($vars['name'] and $vars['dates'])
+	* Renamed template files to .tpl.php instead of .php only
+
+
+---
+
+
+BETA 2 (2012-02-02)
+	+ Added functions (validateEmail, redirect)
+	
+	* Updated jQuery 1.6.0 -> 1.7.1
+	* Handling of template functions. Now uses references instead of return value
+	* Added $randomString1, $randomString2 to variable unset
+
+	
+---
+	
+	
+BETA 1 (2011-10-16)
+	+ Added basic cache
+	
+	* Lots of changes everywhere
+	
+	- Removed uneccecary code

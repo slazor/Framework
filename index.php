@@ -1,4 +1,4 @@
-<?php // 2012-05-05
+<?php // 2012-05-25
 	session_start();
 	define("INDEX", true);
 	ob_start();
@@ -7,7 +7,7 @@
 	include_once('core/functions/functions.php');
 	$page = end(explode('/',$_GET['args']));
 	$args = trim(implode('.',explode('/',$_GET['args'])),'.');
-
+	
 	if(empty($args))	$args = 'start';
 	$pages = $args;
 
@@ -46,12 +46,12 @@
 		$framework['script']['inline'] = array();
 
 		// Get all classes to load
-		$classes = $fw->load_classes('application/classes/');
+		$classes = $fw->load_classes('application/modules/');
 
 		foreach($classes['file'] AS $k => $class) {
 			if(!empty($class)) {
 				// Include classes
-				require_once('application/classes/'.$class);
+				require_once($class);
 				if(!class_exists($classes['name'][$k])) { 
 					throw new ErrorException('Class Not Found !');
 				} else { 
@@ -72,6 +72,10 @@
 		if(isset($vars['style'])) $framework['style']	= array_merge($framework['style'],$vars['style']);
 		if(isset($vars['script'])) $framework['script']	= array_merge($framework['script'],$vars['script']);
 		
+		$vars['style'] = array();
+		$vars['script'] = array();
+		
+		// Catch arguments
 		if(isset($vars['catch_args'])) {
 			foreach($vars['catch_args'] AS $arg) {
 				$file = str_replace('_', '.', $arg);
